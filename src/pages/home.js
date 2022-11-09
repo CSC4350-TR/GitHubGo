@@ -3,10 +3,20 @@ import { Link } from 'react-router-dom'
 
 function Home() {
     return (
+
         <div className="h-screen flex flex-col justify-center items-center">
+            <div>
+                <ul class="ul2">
+                    <li class="li2"></li>
+                    <li class="li2"></li>
+                    <li class="li2"></li>
+                    <li class="li2"></li>
+                    <li class="li2"></li>
+                </ul>
+            </div>
             <main className="flex w-full flex-1 flex-col items-center justify-center text-center">
-                <h1 className=" text-6xl  break-words font-bold">
-                    Welcome to <span className="text-blue-600"> GitHub Go!!! </span>
+                <h1 style={{color:'white'}} className=" text-6xl  break-words font-bold white">
+                    Welcome to <span style={{color:'#24292f'}}> GitHub Go! </span>
                     <br />
                 </h1>
                 <br />

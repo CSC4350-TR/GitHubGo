@@ -1,14 +1,80 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* For Webkit-based browsers (Chrome, Safari and Opera) */
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
+:root{
+	--level-one: translateZ(3rem);
+    --level-two: translateZ(6rem);
+}
+body {
+  background-color: #8345ca;
 }
 
-/* For IE, Edge and Firefox */
-.scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
+/* anmimation for the banner */
+@keyframes animate{
+  from{
+    transform: translateY(+800%) rotate(180deg)
+  }
+  to{
+    transform: translateY(-100%)
+    rotate(360deg)
+  }
+  }
+  .appos{
+    text-align:center;
+  }
+  .app{
+    background: linear-gradient(to left, #2C5364, #203A43, #0F2027);
+    height:90px;
+    width:100%;
+  }
+  .ul2{
+    display:block;
+    width:100%;
+    height:inherit;
+  }
+  .ul2{
+    list-style-type:none;
+  }
+  .li2:nth-child(1)
+  {
+    position:absolute;
+    left:10%;
+    height:45px;
+    width:45px;
+    content: url("logo.png");
+  }
+  .li2:nth-child(2)
+  {
+    position:absolute;
+    left:30%;
+    height:60px;
+    width:60px;
+    content: url("logo.png");
+  }
+  .li2:nth-child(3)
+  {
+    position:absolute;
+    left:50%;
+    height:100px;
+    width:100px;
+    content: url("logo.png");
+  }
+  .li2:nth-child(4)
+  {
+    position:absolute;
+    left:70%;
+    height:45px;
+    width:45px;
+    content: url("logo.png");
+  }
+  .li2:nth-child(5)
+  {
+    position:absolute;
+    left:90%;
+    height:20px;
+    width:20px;
+    content: url("logo.png");
+  }
+  .li2{
+    animation:animate 10s linear 1s infinite;
+  }
