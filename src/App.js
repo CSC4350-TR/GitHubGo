@@ -7,12 +7,12 @@ import RepoStats from './pages/repostats';
 
 function App() {
   return (
-    <Routes>
-      <Route path='/GitHubGo/' element={<Home />} />
-      <Route path='/GitHubGo/repostats' element={<RepoStats />} />
-      <Route path='/GitHubGo/blamefile' element={<BlameFile />} />
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+      <Routes>
+        <Route path='/GitHubGo/' element={<Home />} />
+        <Route path='/GitHubGo/repostats' element={<RepoStats />} />
+        <Route path='/GitHubGo/blamefile' element={<BlameFile />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
   );
 }
 

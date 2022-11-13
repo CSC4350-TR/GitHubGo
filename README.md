@@ -114,3 +114,71 @@ Read their docs to learn more about them:
 | **/src/assets**     | Images and styles     |
 | **/src/components** | Functional components |
 | **/src/pages**      | Routes                |
+
+#### Working with GitHub API using GraphQL
+
+`Step 0:` Run `git pull origin main` and `yarn` in the **main** branch of your IDE.
+
+- To change your branch, type: `git checkout main`
+
+`Step 1`: Create a .env file and fill the following things in it.
+
+```console
+BROWSER=None
+REACT_APP_GITHUB_TOKEN=<paste your personal token here>
+```
+
+- To create your personal GitHub token:
+
+```
+- Go to GitHub
+- Settings
+- Developer settings (At bottom of the page)
+- Personal access token
+- Tokens (classic)
+- Generate new token
+- Generate new token (classic)
+- Name anything you want
+- Click on Generate
+```
+
+- Now, copy that token and paste it into your .env file
+
+<br />
+
+**Example**
+
+```js
+// To request using graphql api, you have to firstimport the following function from the index.js file in the src folder'
+import { axiosGitHubGraphQL } from "..";
+
+// You can write your query this way
+const res = await axiosGitHubGraphQL.post("", {
+  query: `query{
+        viewer{
+            name,
+            login
+        }
+    }`,
+});
+
+const data = res.data ?? "";
+
+// Or you can write your query the following way
+const Query = `query{
+    viewer{
+        name,
+        login
+    }
+}
+`;
+const res = await axiosGitHubGraphQL.post("", {
+  query: Query,
+});
+
+const data = res.data ?? "";
+
+//...there are many more ways !!
+```
+
+* To get updates from the main branch to your current working branch, check out: `git merge` or `git rebase` command
