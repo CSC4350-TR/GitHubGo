@@ -115,18 +115,21 @@ Read their docs to learn more about them:
 | **/src/components** | Functional components |
 | **/src/pages**      | Routes                |
 
+<br/>
 #### Working with GitHub API using GraphQL
 
 `Step 0:` Run `git pull origin main` and `yarn` in the **main** branch of your IDE.
 
 - To change your branch, type: `git checkout main`
 
-`Step 1`: Create a .env file and fill the following things in it.
+`Step 1`: Create a `.env.development` file and fill the following things in it.
 
 ```console
 BROWSER=None
 REACT_APP_GITHUB_TOKEN=<paste your personal token here>
 ```
+
+!! ⚠️ **Write .env.development inside .gitignore** ⚠️ !!
 
 - To create your personal GitHub token:
 
@@ -181,4 +184,4 @@ const data = res.data ?? "";
 //...there are many more ways !!
 ```
 
-* To get updates from the main branch to your current working branch, check out: `git merge` or `git rebase` command
+- To get updates from the main branch to your current working branch, check out: `git merge` or `git rebase` command
