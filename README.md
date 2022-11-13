@@ -116,6 +116,7 @@ Read their docs to learn more about them:
 | **/src/pages**      | Routes                |
 
 <br/>
+
 #### Working with GitHub API using GraphQL
 
 `Step 0:` Run `git pull origin main` and `yarn` in the **main** branch of your IDE.
@@ -133,7 +134,7 @@ REACT_APP_GITHUB_TOKEN=<paste your personal token here>
 
 - To create your personal GitHub token:
 
-```
+```console
 - Go to GitHub
 - Settings
 - Developer settings (At bottom of the page)
@@ -145,7 +146,7 @@ REACT_APP_GITHUB_TOKEN=<paste your personal token here>
 - Click on Generate
 ```
 
-- Now, copy that token and paste it into your .env file
+- Now, copy that token and paste it into your `.env.development` file
 
 <br />
 
