@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import DataPlots from '../components/DataPlots';
+import Loading from '../components/Loading';
 import SummaryData from '../components/SummaryData';
 import Tables from '../components/Tables';
 import { fetchRepostatsData } from '../utils/repostatsQueries/repostatsDataFetcher';
@@ -11,6 +13,7 @@ function RepoStats() {
     const [isUser, setUser] = useState("org")
     const [fetchData, setFetchData] = useState({ userid: "", branches: new Set([]) })
     const [repostatsData, setRepostatsData] = useState({ totalRepoCommit: 0, totalUserCommit: 0, totalAddition: 0, totalDeletion: 0, datalist: [] })
+    const [show, setShow] = useState(false);
     const isSelected = (val) => isUser === val;
     const handleSelectChange = (e) => setUser(e.target.value);
 
@@ -18,6 +21,7 @@ function RepoStats() {
         setForm(i => ({ ...i, [e.target.name]: e.target.value }))
         setValidate(i => ({ ...i, [e.target.name]: false }))
     }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = await validateRepoStats(form.ownername, form.reponame, form.username, validate, isUser, fetchData);
@@ -26,10 +30,12 @@ function RepoStats() {
         setFetchData(data.data)
         if (!data.result) return
         setRepostatsData(await fetchRepostatsData(form.ownername, form.reponame, (data.data.branches.has("main")) ? "main" : data.data.branches.entries().next().value[0], data.data.userid))
+        setShow(true);
+        // console.log(repostatsData.datalist.map(i => i.additions))
     }
 
     return (
-        <div className="flex items-center flex-col min-h-screen mt-4">
+        <div className="flex items-center max-w-7xl flex-col min-h-screen p-6 overflow-hidden">
             <form className='flex flex-col items-center md:items-start gap-3 md:flex-row p-1' onSubmit={handleSubmit}>
                 <div className='flex flex-col'>
                     <input spellCheck={false} value={form.ownername} title="Owner Name" onInput={e => handleInput(e)} className={`bg-gray-50 p-3 rounded-md border-2 ${error.ownername.status ? "border-red-500 focus:outline-red-500" : "focus:outline-gray-200"}`} type={'text'} name='ownername' placeholder="Owner Name" required />
@@ -52,17 +58,20 @@ function RepoStats() {
                 </div>
             </form>
             <br />
-            <SummaryData totalAddition={repostatsData.totalAddition}
-                totalDeletion={repostatsData.totalDeletion}
-                totalUserCommit={repostatsData.totalUserCommit}
-                totalRepoCommit={repostatsData.totalRepoCommit} />
             <br />
             <br />
-            <div>
-            <h2 className='text-center text-3xl'>Data List</h2>
-            <br />
-            <Tables headings={["Additions", "Deletions", "Commit Date"]} rows={repostatsData.datalist} />
-            </div>
+            {show?
+            repostatsData?
+            <div className='overflow-hidden w-full h-full'>
+                <h2 className='text-center text-4xl font-semibold'>Visualization</h2>
+                    <DataPlots repostatsData={repostatsData} />
+                    <SummaryData totalAddition={repostatsData.totalAddition}
+                        totalDeletion={repostatsData.totalDeletion}
+                        totalUserCommit={repostatsData.totalUserCommit}
+                        totalRepoCommit={repostatsData.totalRepoCommit} />
+                    <Tables headings={["Additions", "Deletions", "Commit Date", "File Change", "Commit Message", "Path"]} rows={repostatsData.datalist} />
+            </div>:<Loading />
+            :null}
         </div>
     )
 }
