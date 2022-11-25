@@ -9,6 +9,9 @@ export const commitDataQuery = (ownername, reponame, branch, userid) => `query {
                                         additions
                                         deletions
                                         committedDate
+                                        changedFilesIfAvailable
+                                        message
+                                        commitResourcePath
                                     }
                                 }
                             } 
