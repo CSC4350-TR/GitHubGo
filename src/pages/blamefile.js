@@ -21,15 +21,14 @@ function History(props) {
 
 function BlameFile() {
     const [error, setErrors] = useState({ ownername: { status: false, message: "" }, reponame: { status: false, message: "" }, ownername: { status: false, message: "" }, filepath: { status: false, messasge: "" } })
-    const [form, setForm] = useState({ ownername: "CSC4350-TR", reponame: "GitHubGo", filepath: "src/App.js" });
+    const [form, setForm] = useState({ ownername: "CSC4350-TR", reponame: "GitHubGo", filepath: "https://github.com/CSC4350-TR/GitHubGo/tree/main/src/App.js" });
     const [validate, setValidate] = useState({ ownername: false, reponame: false, filename: true })
-    // const [isUser, setUser] = useState("org")
+    const [isUser, setUser] = useState("org")
     const [fetchData, setFetchData] = useState({ userid: "", branches: new Set([]) })
     
-    const [blamefileData, setfetchBlameFileData] = useState({ startingLine: 0, endingLine: 0, age: 0, name: "", oid:0, date:new Date().toLocaleString(), total:0, url:"", })
+    const [blamefileData, setfetchBlameFileData] = useState({ startingLine: 0, endingLine: 0, age: 0, name: "", oid:0, date: "", total:0, url:"", })
     const [show, setShow] = useState(false);
     
-    const [isUser, setUser] = useState("org")
     const isSelected = (val) => isUser === val;
     const handleSelectChange = (e) => setUser(e.target.value);
     
@@ -56,9 +55,9 @@ function BlameFile() {
     return (
         <div className="flex items-center flex-col min-h-screen">
             <form className='flex flex-col gap-3 md:flex-row mt-4' onSubmit={handleSubmit}>
-                <input spellCheck={false} title="Owner Name" className="bg-gray-50 p-3 rounded-md focus:outline-gray-200" type={'text'} name='ownername' placeholder="CSC4350-TR"/>
-                <input spellCheck={false} title="Repository Name" className="bg-gray-50 p-3 rounded-md focus:outline-gray-200" type={'text'} name='reponame' placeholder="GitHubGo"/>
-                <input spellCheck={false} title="File path" className="bg-gray-50 p-3 rounded-md focus:outline-gray-200" type={'text'} name='filepath' placeholder="src/App.js" />
+                <input spellCheck={false} title="Owner Name" className="bg-gray-50 p-3 rounded-md focus:outline-gray-200" type={'text'} name='ownername' placeholder="Repository Owner"/>
+                <input spellCheck={false} title="Repository Name" className="bg-gray-50 p-3 rounded-md focus:outline-gray-200" type={'text'} name='reponame' placeholder="Repository Name"/>
+                <input spellCheck={false} title="File path" className="bg-gray-50 p-3 rounded-md focus:outline-gray-200" type={'text'} name='filepath' placeholder="File Path" />
                 <button type={"submit"} className="p-3 text-white bg-blue-500 rounded-md focus:outline-blue-700">Submit</button>
             </form>
             
