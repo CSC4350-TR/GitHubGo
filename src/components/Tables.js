@@ -9,7 +9,6 @@ const Tables = ({ headings, rows }) => {
         const nrow = rows.reduce((accr, i) => {
             return accr+ i.additions+","+i.deletions +"," +i.committedDate.toString()+","+i.changedFilesIfAvailable+",\""+i.message.split("\n").map(i=> i.replace(/"/g, "'")).join(" ")+"\",https://github.com"+i.commitResourcePath +"\n"
         }, "")
-        console.log(nrow)
         const blob = new Blob([header.slice(0, header.length-1)+"\n"+nrow], {type: "text/csv", endings: "native"})
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a');
@@ -20,18 +19,17 @@ const Tables = ({ headings, rows }) => {
         link.parentNode.removeChild(link);
     }   
     return (
-        <div className='w-full h-full flex flex-col gap-4 items-center'>
-            <h1 className='text-center  font-semibold text-4xl'>Data</h1>
-            <br />
-            <div className='w-full flex justify-center h-full'>
+        <div className='w-full h-[94vh] gap-1 md:h-[96vh] flex flex-col md:gap-4 items-center'>
+            <h1 className='text-center font-semibold text-4xl'>Data</h1>
+            <div className='w-full flex items-center justify-center h-full'>
                 <div className='max-w-4xl max-h-[480px] overflow-scroll scrollbar-hide'>
-                    <table className='table-auto text-center rounded-md min-w-full p-2'>
-                        <thead className=' sticky-md-top sticky bg-gray-50'>
+                    <table className='table-auto relative text-center rounded-md min-w-full p-2'>
+                        <thead className='sticky top-0 bg-gray-50'>
                             <tr className='bg-gray-50'>
                                 {headings.map(((i, k) => <th key={k + Math.random()} className='p-2 border-collapse border-l border-r '>{i}</th>))}
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='divide-y'>
                             {rows.length === 0 ? <tr className='text-center'><td></td><td>No data</td><td></td></tr> : rows.map(((i, k) => {
                                 return <tr key={k + Math.random()} className=''>
                                     {Object.entries(i).map((k, idx) => {
