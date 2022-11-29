@@ -60,7 +60,7 @@ Open your project folder and type this in your terminal:
 yarn start
 ```
 
-The website will run on `localhost:3000`
+The website will run on `localhost:3000/GitHubGo`
 
 <br/>
 
