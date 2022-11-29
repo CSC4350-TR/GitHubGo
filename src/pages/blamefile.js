@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchBlameFileData } from '../utils/blamefileQueries/blamefileDataFetcher';
+//import { fetchBlameFileData } from '../utils/blamefileQueries/blamefileDataFetcher';
 
 const BlameFile = () => {
     const handleSubmit = (e) => {
