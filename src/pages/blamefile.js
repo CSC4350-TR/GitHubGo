@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import Loading from '../components/Loading';
-import { fetchBlameFileData } from '../utils/blamefileQueries/blamefileDataFetcher';
-import { validateRepoStats } from '../utils/validation/validate';
+import React from 'react';
+//import { fetchBlameFileData } from '../utils/blamefileQueries/blamefileDataFetcher';
 
 function History(props) {
     return <li> 
