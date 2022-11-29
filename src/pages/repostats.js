@@ -29,13 +29,13 @@ function RepoStats() {
         setValidate(Object.fromEntries(Object.entries(data.errors).map(i => [i[0], !i[1].status])))
         setFetchData(data.data)
         if (!data.result) return
-        setRepostatsData(await fetchRepostatsData(form.ownername, form.reponame, (data.data.branches.has("main")) ? "main" : data.data.branches.entries().next().value[0], data.data.userid))
+        setRepostatsData(await fetchRepostatsData(form.ownername, form.reponame, data.data.userid, "main"))
         setShow(true);
         // console.log(repostatsData.datalist.map(i => i.additions))
     }
 
     return (
-        <div className="flex items-center max-w-7xl flex-col min-h-screen p-6 overflow-hidden">
+        <div className="flex items-center justify-center max-w-7xl flex-col min-h-screen p-6 overflow-hidden">
             <form className='flex flex-col items-center md:items-start gap-3 md:flex-row p-1' onSubmit={handleSubmit}>
                 <div className='flex flex-col'>
                     <input spellCheck={false} value={form.ownername} title="Owner Name" onInput={e => handleInput(e)} className={`bg-gray-50 p-3 rounded-md border-2 ${error.ownername.status ? "border-red-500 focus:outline-red-500" : "focus:outline-gray-200"}`} type={'text'} name='ownername' placeholder="Owner Name" required />
