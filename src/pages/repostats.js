@@ -73,7 +73,9 @@ function RepoStats() {
             </div>:<Loading />
             :null}
         </div>
-    )
-}
+      )}
+    </div>
+  );
+};
 
-export default RepoStats
+export default RepoStats;
