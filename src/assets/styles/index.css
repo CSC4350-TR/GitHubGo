@@ -5,9 +5,6 @@
 	--level-one: translateZ(3rem);
     --level-two: translateZ(6rem);
 }
-body {
-  background-color: #8345ca;
-}
 
 /* anmimation for the banner */
 @keyframes animate{
