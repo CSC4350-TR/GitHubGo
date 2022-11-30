@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import RepoInfo from "../components/RepoInfos";
+import React, { useState } from 'react';
+import DataPlots from '../components/DataPlots';
+import Loading from '../components/Loading';
+import SummaryData from '../components/SummaryData';
+import Tables from '../components/Tables';
+import { fetchRepostatsData } from '../utils/repostatsQueries/repostatsDataFetcher';
+import { validateRepoStats } from '../utils/validation/validate';
 
 function RepoStats() {
     const [error, setErrors] = useState({ username: { status: false, message: "" }, reponame: { status: false, message: "" }, ownername: { status: false, message: "" }, filepath: { status: false, messasge: "" } })
@@ -68,9 +73,7 @@ function RepoStats() {
             </div>:<Loading />
             :null}
         </div>
-      )}
-    </div>
-  );
-};
+    )
+}
 
-export default RepoStats;
+export default RepoStats
