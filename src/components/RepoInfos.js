@@ -7,9 +7,9 @@ const RepoInfos = ({ username, selectedRepo }) => {
   const [repoPull, setRepoPull] = useState([]);
   const [selectedPull, setSelectedPull] = useState();
 
-  useEffect(() => {
-    console.log(selectedPull);
-  }, [selectedPull]);
+  // useEffect(() => {
+  //   console.log(selectedPull);
+  // }, [selectedPull]);
 
   useEffect(() => {
     if (!(username && selectedRepo)) {
@@ -104,7 +104,7 @@ const RepoInfos = ({ username, selectedRepo }) => {
                 <ol className="list-decimal">
                   {repoPull.map((pull) => (
                     <li
-                      key={pull.id}
+                      key={pull.id+"rp"}
                       className="underline cursor-pointer"
                       onClick={() => setSelectedPull(pull)}
                     >

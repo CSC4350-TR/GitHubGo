@@ -7,7 +7,7 @@
 }
 
 /* anmimation for the banner */
-@keyframes animate{
+/* @keyframes animate{
   from{
     transform: translateY(+800%) rotate(180deg)
   }
@@ -74,4 +74,4 @@
   }
   .li2{
     animation:animate 10s linear 1s infinite;
-  }
+  } */
