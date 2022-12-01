@@ -8,9 +8,9 @@ import { validateRepoStats } from '../utils/validation/validate';
 
 function RepoStats() {
     const [error, setErrors] = useState({ username: { status: false, message: "" }, reponame: { status: false, message: "" }, ownername: { status: false, message: "" }, filepath: { status: false, messasge: "" } })
-    const [form, setForm] = useState({ ownername: "CSC4350-TR", reponame: "GitHubGo", username: "Meet-forever" });
+    const [form, setForm] = useState({ ownername: "", reponame: "", username: "" });
     const [validate, setValidate] = useState({ ownername: false, reponame: false, username: false, filename: true })
-    const [isUser, setUser] = useState("org")
+    const [isUser, setUser] = useState("user")
     const [fetchData, setFetchData] = useState({ userid: "", branches: new Set([]) })
     const [repostatsData, setRepostatsData] = useState({ totalRepoCommit: 0, totalUserCommit: 0, totalAddition: 0, totalDeletion: 0, datalist: [] })
     const [show, setShow] = useState(false);
@@ -37,7 +37,7 @@ function RepoStats() {
     }
 
     return (
-        <div className="flex items-center justify-start max-w-7xl flex-col min-h-screen p-6 overflow-hidden">
+        <div className="flex items-center mx-auto justify-start max-w-7xl flex-col min-h-screen p-6 overflow-hidden">
             <form className='flex flex-col items-center md:items-start gap-3 md:flex-row p-1' onSubmit={handleSubmit}>
                 <div className='flex flex-col'>
                     <input spellCheck={false} value={form.ownername} title="Owner Name" onInput={e => handleInput(e)} className={`bg-gray-50 p-3 rounded-md border-2 ${error.ownername.status ? "border-red-500 focus:outline-red-500" : "focus:outline-gray-200"}`} type={'text'} name='ownername' placeholder="Owner Name" required />

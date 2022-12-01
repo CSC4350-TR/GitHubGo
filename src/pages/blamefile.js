@@ -6,9 +6,9 @@ import { fetchBlameFileData } from '../utils/blamefileQueries/blamefileDataFetch
 
 function BlameFile() {
     const [error, setErrors] = useState({ ownername: { status: false, message: "" }, reponame: { status: false, message: "" }, username: { status: false, message: "" }, filepath: { status: false, messasge: "" } })
-    const [form, setForm] = useState({ ownername: "CSC4350-TR", reponame: "GitHubGo", filepath: "https://github.com/CSC4350-TR/GitHubGo/tree/main/src/App.js" });
+    const [form, setForm] = useState({ ownername: "", reponame: "", filepath: "" });
     const [validate, setValidate] = useState({ ownername: false, reponame: false, filepath: false, username: true })
-    const [isUser, setUser] = useState("org");
+    const [isUser, setUser] = useState("user");
     const branch = useRef("HEAD")
     const [isloading, setLoading] = useState(false)
     const relativeFilePath = useRef("")
@@ -74,7 +74,7 @@ function BlameFile() {
     }
 
     return (
-        <div className="flex items-center max-w-7xl flex-col min-h-screen p-6 overflow-hidden">
+        <div className="flex mx-auto items-center max-w-7xl flex-col min-h-screen p-6 overflow-hidden">
             <form className='flex flex-col items-center md:items-start gap-3 md:flex-row p-1' onSubmit={handleSubmit}>
                 <div className='flex flex-col'>
                     <input spellCheck={false} value={form.ownername} title="Owner Name" onInput={e => handleInput(e)} className={`bg-gray-50 p-3 rounded-md border-2 ${error.ownername.status ? "border-red-500 focus:outline-red-500" : "focus:outline-gray-200"}`} type={'text'} name='ownername' placeholder="Owner Name" required />
@@ -113,11 +113,11 @@ function BlameFile() {
                                     <div key={ky + "box"} className='flex w-full border-b border-[#474747]'>
                                         <div className='self-stretch'>
                                             <div className='p-2 w-[480px] truncate flex justify-between items-center'>
-                                                <div className='flex'>
-                                                    <span className='px-2'><a href={i[0].author.user.url} title="user profile" rel="noreferrer" target="_blank" ><img className='w-4 h-4 flex-grow-0 flex-shrink-0 rounded-lg' src={i[0].author.user.avatarUrl} alt="author avatar" /></a></span>
-                                                    <span className='flex-grow-0 flex-shrink-0 hover:underline'><a href={i[0].url} rel="noreferrer" title="user commit path" target="_blank">{i[0].message}</a></span>
+                                                <div className='flex w-[420px]'>
+                                                    <span className='px-2 w-[40px]'><a href={i[0].author.user.url} title={`${i[0].author.user.login}`} rel="noreferrer" target="_blank" ><img className='w-4 h-4 flex-grow-0 flex-shrink-0 rounded-lg' src={i[0].author.user.avatarUrl} alt="author avatar" /></a></span>
+                                                    <span className='flex-grow-0 flex-shrink-0 hover:underline truncate w-[360px]'><a href={i[0].url} rel="noreferrer" title="user commit path" target="_blank">{i[0].message}</a></span>
                                                 </div>
-                                                <div className='text-[0.7rem]'>{(new Date(i[0].committedDate)).toLocaleString('en-US', {year: 'numeric', month: 'short', day: '2-digit'})}</div>
+                                                <div className='text-[0.7rem] w-[70px]'>{(new Date(i[0].committedDate)).toLocaleString('en-US', {year: 'numeric', month: 'short', day: '2-digit'})}</div>
                                             </div>
                                         </div>
 

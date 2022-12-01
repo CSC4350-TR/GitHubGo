@@ -24,6 +24,5 @@ export const fetchBlameFileData = async(ownername, reponame, branch, filepath) =
             const temp = codeLines.slice(arrRange[i].startingLine, arrRange[i].endingLine+1)
             store.push([arrRange[i].commit, temp, arrRange[i].startingLine])
         }
-        console.log(store)
         return {fileContent: store} 
 }
