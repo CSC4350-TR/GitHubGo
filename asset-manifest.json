@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/GitHubGo/static/css/main.bde9c930.css",
-    "main.js": "/GitHubGo/static/js/main.827e9a27.js",
+    "main.css": "/GitHubGo/static/css/main.0b0e9a06.css",
+    "main.js": "/GitHubGo/static/js/main.0e489c7b.js",
     "static/media/404bg.jpg": "/GitHubGo/static/media/404bg.585cbe76cfff313611fd.jpg",
     "static/media/loading-spinner.gif": "/GitHubGo/static/media/loading-spinner.b719921a23a7c178aa2c.gif",
     "index.html": "/GitHubGo/index.html",
-    "main.bde9c930.css.map": "/GitHubGo/static/css/main.bde9c930.css.map",
-    "main.827e9a27.js.map": "/GitHubGo/static/js/main.827e9a27.js.map"
+    "main.0b0e9a06.css.map": "/GitHubGo/static/css/main.0b0e9a06.css.map",
+    "main.0e489c7b.js.map": "/GitHubGo/static/js/main.0e489c7b.js.map"
   },
   "entrypoints": [
-    "static/css/main.bde9c930.css",
-    "static/js/main.827e9a27.js"
+    "static/css/main.0b0e9a06.css",
+    "static/js/main.0e489c7b.js"
   ]
 }
