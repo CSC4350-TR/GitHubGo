@@ -5,12 +5,9 @@
 	--level-one: translateZ(3rem);
     --level-two: translateZ(6rem);
 }
-body {
-  background-color: #8345ca;
-}
 
 /* anmimation for the banner */
-@keyframes animate{
+/* @keyframes animate{
   from{
     transform: translateY(+800%) rotate(180deg)
   }
@@ -77,4 +74,4 @@ body {
   }
   .li2{
     animation:animate 10s linear 1s infinite;
-  }
+  } */
