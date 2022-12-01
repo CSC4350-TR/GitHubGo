@@ -5,7 +5,6 @@ import Home from './pages/home';
 import PageNotFound from './pages/pagenotfound';
 import RepoStats from './pages/repostats';
 import UsernameSearch from './pages/usernamesearch';
-//import './App.css';
 
 function App() {
   return (

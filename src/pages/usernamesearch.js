@@ -10,7 +10,12 @@ const UsernameSearch = () => {
   const fetchGitHubUsername = async (e) => {
     e.preventDefault();
     const usernameInput = e.target.username.value;
-    fetch(`https://api.github.com/users/${usernameInput}/repos`)
+    fetch(`https://api.github.com/users/${usernameInput}/repos`, {
+      headers: {
+        "Content-Type": ' application/json',
+        "Authorization": `bearer ${process.env.REACT_APP_GITHUB_TOKEN}`
+      }
+    })
       .then((res) => res.json())
       .then((result) => {
         if (result?.message === "Not Found") setIsNotFound(true);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CommitInfos from "../components/CommitInfo";
+import axios from 'axios';
 
 const PullInfos = ({ selectedPull }) => {
   const [commitInfo, setCommitInfo] = useState([]);
@@ -7,11 +8,14 @@ const PullInfos = ({ selectedPull }) => {
 
   useEffect(() => {
     if (!selectedPull) return;
-    fetch(selectedPull.commits_url)
-      .then((res) => res.json())
+    axios.get(selectedPull.commits_url, {
+      headers: {
+        "Authorization": `bearer ${process.env.REACT_APP_GITHUB_TOKEN}`
+      }
+    })
       .then((result) => {
-        setCommitInfo(result);
-      });
+        setCommitInfo(result.data);
+      }).catch(err => console.error(err.message));
   }, [selectedPull]);
   return (
     <div className="pl-3 pr-3 w-full">

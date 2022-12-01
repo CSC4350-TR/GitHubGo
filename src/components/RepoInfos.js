@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PullInfos from "../components/PullInfos";
+import axios from 'axios';
 
 const RepoInfos = ({ username, selectedRepo }) => {
   const [repoInfo, setRepoInfo] = useState();
@@ -7,9 +8,6 @@ const RepoInfos = ({ username, selectedRepo }) => {
   const [repoPull, setRepoPull] = useState([]);
   const [selectedPull, setSelectedPull] = useState();
 
-  // useEffect(() => {
-  //   console.log(selectedPull);
-  // }, [selectedPull]);
 
   useEffect(() => {
     if (!(username && selectedRepo)) {
@@ -17,31 +15,37 @@ const RepoInfos = ({ username, selectedRepo }) => {
       return;
     }
     const fetchRepoInfo = async () => {
-      fetch(`https://api.github.com/repos/${username}/${selectedRepo}`)
-        .then((res) => res.json())
-        .then((result) => {
-          setRepoInfo(result);
+      axios.get(`https://api.github.com/repos/${username}/${selectedRepo}`, {
+        headers: {
+          "Authorization": `bearer ${process.env.REACT_APP_GITHUB_TOKEN}`
+        }
+      })
+        .then(async(result) => {
+          setRepoInfo(result.data);
 
-          if (result.contributors_url) {
-            fetch(
-              `https://api.github.com/repos/${username}/${selectedRepo}/contributors`
-            )
-              .then((res) => res.json())
+          if (result.data.contributors_url) {
+            axios.get(
+              `https://api.github.com/repos/${username}/${selectedRepo}/contributors`, {
+              headers: {
+                "Authorization": `bearer ${process.env.REACT_APP_GITHUB_TOKEN}`
+              }
+            })
               .then((result) => {
-                setRepoContributor(result);
-              });
+                setRepoContributor(result.data);
+              }).catch(err => console.error(err.message));
           }
 
-          fetch(
-            `https://api.github.com/repos/${username}/${selectedRepo}/pulls`
-          )
-            .then((res) => res.json())
+          axios.get(
+            `https://api.github.com/repos/${username}/${selectedRepo}/pulls`, {
+            headers: {
+              "Authorization": `bearer ${process.env.REACT_APP_GITHUB_TOKEN}`
+            }
+          })
             .then((result) => {
-              setRepoPull(result);
-            });
-        });
+              setRepoPull(result.data);
+            }).catch(err => console.error(err.message));
+        }).catch(err => console.error(err.message));
     };
-
     fetchRepoInfo();
   }, [username, selectedRepo]);
 
@@ -63,10 +67,10 @@ const RepoInfos = ({ username, selectedRepo }) => {
             {repoContributor.length && (
               <div>
                 <span className="w-3 font-bold">Contributors: &nbsp;</span>
-                {repoContributor.map((contributor) => (
-                  <div className="flex ml-6 mb-3 gap-3 items-center">
+                {repoContributor.map((contributor, k) => (
+                  <div key={k+"-contributor"} className="flex ml-6 mb-3 gap-3 items-center">
                     <img
-                      className="w-12 h12"
+                      className="w-12 h12 rounded-3xl"
                       src={contributor.avatar_url}
                       alt="contributor_avt"
                     />
@@ -78,7 +82,7 @@ const RepoInfos = ({ username, selectedRepo }) => {
               </div>
             )}
 
-            {(repoInfo.topics && repoInfo.topics.length) && (
+            {(repoInfo.topics && repoInfo.topics.length)? (
               <div>
                 <span className="w-3 font-bold">Topics: &nbsp;</span>
                 <div className="flex gap-1">
@@ -89,7 +93,7 @@ const RepoInfos = ({ username, selectedRepo }) => {
                   ))}
                 </div>
               </div>
-            )}
+            ): null}
 
             <hr className="m-3 ml-0" />
             <div>
@@ -104,7 +108,7 @@ const RepoInfos = ({ username, selectedRepo }) => {
                 <ol className="list-decimal">
                   {repoPull.map((pull) => (
                     <li
-                      key={pull.id+"rp"}
+                      key={pull.id + "rp"}
                       className="underline cursor-pointer"
                       onClick={() => setSelectedPull(pull)}
                     >
@@ -120,7 +124,7 @@ const RepoInfos = ({ username, selectedRepo }) => {
             <div className="flex flex-col w-6/12">
               <div className="flex flex-col items-center">
                 <img
-                  className="w-6/12 border border-solid"
+                  className="w-6/12 border border-solid rounded-md"
                   src={repoInfo.owner.avatar_url}
                   alt="owner-avt"
                 />
