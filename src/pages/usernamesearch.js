@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import RepoInfo from "../components/RepoInfos";
 
-const RepoStats = () => {
+const UsernameSearch = () => {
   const [username, setUsername] = useState("");
   const [repoList, setRepoList] = useState();
   const [isNotFound, setIsNotFound] = useState(false);
@@ -10,7 +10,6 @@ const RepoStats = () => {
   const fetchGitHubUsername = async (e) => {
     e.preventDefault();
     const usernameInput = e.target.username.value;
-
     fetch(`https://api.github.com/users/${usernameInput}/repos`)
       .then((res) => res.json())
       .then((result) => {
@@ -101,4 +100,4 @@ const RepoStats = () => {
   );
 };
 
-export default RepoStats;
+export default UsernameSearch;
