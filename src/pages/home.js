@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 function Home() {
     return (
-
         <div className="h-screen flex flex-col justify-center items-center">
             <main className="flex w-full flex-1 flex-col items-center justify-center text-center">
                 <h1 className=" text-6xl  break-words font-bold">

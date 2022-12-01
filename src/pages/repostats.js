@@ -14,6 +14,7 @@ function RepoStats() {
     const [fetchData, setFetchData] = useState({ userid: "", branches: new Set([]) })
     const [repostatsData, setRepostatsData] = useState({ totalRepoCommit: 0, totalUserCommit: 0, totalAddition: 0, totalDeletion: 0, datalist: [] })
     const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(false);
     const isSelected = (val) => isUser === val;
     const handleSelectChange = (e) => setUser(e.target.value);
 
@@ -29,9 +30,10 @@ function RepoStats() {
         setValidate(Object.fromEntries(Object.entries(data.errors).map(i => [i[0], !i[1].status])))
         setFetchData(data.data)
         if (!data.result) return
+        setLoading(true);
         setRepostatsData(await fetchRepostatsData(form.ownername, form.reponame, data.data.userid, "main"))
+        setLoading(false);
         setShow(true);
-        // console.log(repostatsData.datalist.map(i => i.additions))
     }
 
     return (
@@ -60,18 +62,20 @@ function RepoStats() {
             <br />
             <br />
             <br />
-            {show?
-            repostatsData?
-            <div className='overflow-hidden w-full h-full'>
-                <h2 className='text-center text-4xl font-semibold'>Visualization</h2>
-                    <DataPlots repostatsData={repostatsData} />
-                    <SummaryData totalAddition={repostatsData.totalAddition}
-                        totalDeletion={repostatsData.totalDeletion}
-                        totalUserCommit={repostatsData.totalUserCommit}
-                        totalRepoCommit={repostatsData.totalRepoCommit} />
-                    <Tables headings={["Additions", "Deletions", "Commit Date", "File Change", "Commit Message", "Path"]} rows={repostatsData.datalist} />
-            </div>:<Loading />
-            :null}
+            {show ?
+                loading ? <Loading /> :
+                    repostatsData ?
+                        <div className='overflow-hidden w-full h-full'>
+                            <h2 className='text-center text-4xl font-semibold'>Visualization</h2>
+                            <DataPlots repostatsData={repostatsData} />
+                            <SummaryData totalAddition={repostatsData.totalAddition}
+                                totalDeletion={repostatsData.totalDeletion}
+                                totalUserCommit={repostatsData.totalUserCommit}
+                                totalRepoCommit={repostatsData.totalRepoCommit} />
+                            <Tables headings={["Additions", "Deletions", "Commit Date", "File Change", "Commit Message", "Path"]} rows={repostatsData.datalist} />
+                        </div>
+                        : <Loading />
+                : null}
         </div>
     )
 }

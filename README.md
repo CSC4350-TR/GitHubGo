@@ -93,7 +93,6 @@ Read their docs to learn more about them:
 
 - TailwindCSS [docs](https://tailwindcss.com/docs/installation)
 
-- Tailwind Elements [docs](https://tailwind-elements.com/quick-start/)
 
 <br />
 

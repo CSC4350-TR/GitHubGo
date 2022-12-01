@@ -16,8 +16,14 @@ export const fetchBlameFileData = async(ownername, reponame, branch, filepath) =
             // Cannot read binary files
             return {fileContent: [], isbinary: true} 
         }
+        const arrRange = res.data.data.repositoryOwner.repository.object.blame.ranges
+        const codeLines = res.data.data.file.object.text.split("\n")
         
-        console.log(res)
-        // if(res.data.data.)
-        return {fileContent: res.data.data.file.object?.text ? res.data.data.file.object.text.split("\n") : []} 
+        let store = []
+        for(let i = 0; i < arrRange.length; i++){
+            const temp = codeLines.slice(arrRange[i].startingLine, arrRange[i].endingLine+1)
+            store.push([arrRange[i].commit, temp, arrRange[i].startingLine])
+        }
+        console.log(store)
+        return {fileContent: store} 
 }
