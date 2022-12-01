@@ -86,8 +86,8 @@ const RepoInfos = ({ username, selectedRepo }) => {
               <div>
                 <span className="w-3 font-bold">Topics: &nbsp;</span>
                 <div className="flex gap-1">
-                  {repoInfo.topics.map((topic) => (
-                    <div className="border border-solid p-1 bg-blue-300 w-max rounded">
+                  {repoInfo.topics.map((topic, k) => (
+                    <div key={k+"t"} className="border border-solid p-1 bg-blue-300 w-max rounded">
                       {topic.toUpperCase()}
                     </div>
                   ))}
