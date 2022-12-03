@@ -8,12 +8,13 @@ import { validateRepoStats } from '../utils/validation/validate';
 
 function RepoStats() {
     const [error, setErrors] = useState({ username: { status: false, message: "" }, reponame: { status: false, message: "" }, ownername: { status: false, message: "" }, filepath: { status: false, messasge: "" } })
-    const [form, setForm] = useState({ ownername: "CSC4350-TR", reponame: "GitHubGo", username: "Meet-forever" });
+    const [form, setForm] = useState({ ownername: "", reponame: "", username: "" });
     const [validate, setValidate] = useState({ ownername: false, reponame: false, username: false, filename: true })
-    const [isUser, setUser] = useState("org")
+    const [isUser, setUser] = useState("user")
     const [fetchData, setFetchData] = useState({ userid: "", branches: new Set([]) })
     const [repostatsData, setRepostatsData] = useState({ totalRepoCommit: 0, totalUserCommit: 0, totalAddition: 0, totalDeletion: 0, datalist: [] })
     const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(false);
     const isSelected = (val) => isUser === val;
     const handleSelectChange = (e) => setUser(e.target.value);
 
@@ -29,13 +30,14 @@ function RepoStats() {
         setValidate(Object.fromEntries(Object.entries(data.errors).map(i => [i[0], !i[1].status])))
         setFetchData(data.data)
         if (!data.result) return
-        setRepostatsData(await fetchRepostatsData(form.ownername, form.reponame, (data.data.branches.has("main")) ? "main" : data.data.branches.entries().next().value[0], data.data.userid))
+        setLoading(true);
+        setRepostatsData(await fetchRepostatsData(form.ownername, form.reponame, data.data.userid, "main"))
+        setLoading(false);
         setShow(true);
-        // console.log(repostatsData.datalist.map(i => i.additions))
     }
 
     return (
-        <div className="flex items-center max-w-7xl flex-col min-h-screen p-6 overflow-hidden">
+        <div className="flex items-center mx-auto justify-start max-w-7xl flex-col min-h-screen p-6 overflow-hidden">
             <form className='flex flex-col items-center md:items-start gap-3 md:flex-row p-1' onSubmit={handleSubmit}>
                 <div className='flex flex-col'>
                     <input spellCheck={false} value={form.ownername} title="Owner Name" onInput={e => handleInput(e)} className={`bg-gray-50 p-3 rounded-md border-2 ${error.ownername.status ? "border-red-500 focus:outline-red-500" : "focus:outline-gray-200"}`} type={'text'} name='ownername' placeholder="Owner Name" required />
@@ -60,18 +62,20 @@ function RepoStats() {
             <br />
             <br />
             <br />
-            {show?
-            repostatsData?
-            <div className='overflow-hidden w-full h-full'>
-                <h2 className='text-center text-4xl font-semibold'>Visualization</h2>
-                    <DataPlots repostatsData={repostatsData} />
-                    <SummaryData totalAddition={repostatsData.totalAddition}
-                        totalDeletion={repostatsData.totalDeletion}
-                        totalUserCommit={repostatsData.totalUserCommit}
-                        totalRepoCommit={repostatsData.totalRepoCommit} />
-                    <Tables headings={["Additions", "Deletions", "Commit Date", "File Change", "Commit Message", "Path"]} rows={repostatsData.datalist} />
-            </div>:<Loading />
-            :null}
+            {show ?
+                loading ? <Loading /> :
+                    repostatsData ?
+                        <div className='overflow-hidden w-full h-full'>
+                            <h2 className='text-center text-4xl font-semibold'>Visualization</h2>
+                            <DataPlots repostatsData={repostatsData} />
+                            <SummaryData totalAddition={repostatsData.totalAddition}
+                                totalDeletion={repostatsData.totalDeletion}
+                                totalUserCommit={repostatsData.totalUserCommit}
+                                totalRepoCommit={repostatsData.totalRepoCommit} />
+                            <Tables headings={["Additions", "Deletions", "Commit Date", "File Change", "Commit Message", "Path"]} rows={repostatsData.datalist} />
+                        </div>
+                        : <Loading />
+                : null}
         </div>
     )
 }

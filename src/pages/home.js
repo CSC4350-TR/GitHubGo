@@ -19,6 +19,14 @@ function Home() {
                             active:[box-shadow:0_0px_0_0_#1b6ff8,0_0px_0_0_#1b70f841] 
                             transition-all duration-[450ms]'>Repo Stats</button>
                     </Link>
+                    <Link to="/GitHubGo/usernamesearch">
+                        <button className='md:m-10 bg-blue-500 m-5 w-max pl-3 pr-3 h-16 font-semibold text-white rounded-md
+                            [box-shadow:0_10px_0_0_#1b6ff8,0_15px_0_0_#1b70f841]
+                            md:text-lg text-md
+                            active:translate-x-3 select-none
+                            active:[box-shadow:0_0px_0_0_#1b6ff8,0_0px_0_0_#1b70f841] 
+                            transition-all duration-[450ms]'>Username Search</button>
+                    </Link>
                     <Link to="/GitHubGo/blamefile">
                         <button className='md:m-10 bg-blue-500 m-5 w-36 h-16 font-semibold text-white rounded-md
                             [box-shadow:0_10px_0_0_#1b6ff8,0_15px_0_0_#1b70f841]

@@ -60,7 +60,7 @@ Open your project folder and type this in your terminal:
 yarn start
 ```
 
-The website will run on `localhost:3000`
+The website will run on `localhost:3000/GitHubGo`
 
 <br/>
 
@@ -87,13 +87,11 @@ yarn
 
 #### Styling
 
-We are using TailwindCSS for styling and its plugin - Tailwind Elements - to use pre-built UI components.
+We are using TailwindCSS for styling
 
 Read their docs to learn more about them:
 
 - TailwindCSS [docs](https://tailwindcss.com/docs/installation)
-
-- Tailwind Elements [docs](https://tailwind-elements.com/quick-start/)
 
 <br />
 
@@ -107,13 +105,14 @@ Read their docs to learn more about them:
 
 #### Project Structure
 
-| Path                | Description           |
-| :------------------ | :-------------------- |
-| **/public**         | Static files          |
-| **/src**            | Source code           |
-| **/src/assets**     | Images and styles     |
-| **/src/components** | Functional components |
-| **/src/pages**      | Routes                |
+| Path                | Description                                |
+| :------------------ | :----------------------------------------- |
+| **/public**         | Static files                               |
+| **/src**            | Source code                                |
+| **/src/assets**     | Images and styles                          |
+| **/src/components** | Functional components                      |
+| **/src/pages**      | Routes                                     |
+| **/src/utils**      | Things that are not related to client side |
 
 <br/>
 
@@ -123,7 +122,7 @@ Read their docs to learn more about them:
 
 - To change your branch, type: `git checkout main`
 
-`Step 1`: Create a `.env.development` file and fill the following things in it.
+`Step 1`: Create a `.env.development` file on the root of this project(where this readme file is) and fill the following things in it.
 
 ```console
 BROWSER=None
@@ -146,7 +145,21 @@ REACT_APP_GITHUB_TOKEN=<paste your personal token here>
 - Click on Generate
 ```
 
-- Now, copy that token and paste it into your `.env.development` file
+When generating the token, make sure you select all the permissions mentioned below
+
+```console
+repo
+read:packages
+read:org
+read:public_key
+read:repo_hook
+user
+read:discussion
+read:enterprise
+read:gpg_key
+```
+
+- Now copy that token and paste it into your `.env.development` file
 
 <br />
 
@@ -185,4 +198,6 @@ const data = res.data ?? "";
 //...there are many more ways !!
 ```
 
-- To get updates from the main branch to your current working branch, check out: `git merge` or `git rebase` command
+- Always sync your current working branch with the main branch by typing `git pull origin main` 
+
+- To add changes from your current working branch to the main branch, read documentations or watch videos on: `git merge` and `git rebase` command.

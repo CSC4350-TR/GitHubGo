@@ -7,21 +7,30 @@ export const lastChangeQuery = (ownername, reponame, branch, filepath) => `query
             ranges {
               startingLine
               endingLine
-              age
               commit {
                 oid
                 author {
-                  name
+                  user{
+                    login
+                    avatarUrl
+                    url
+                  }
                 }
                 committedDate
-                history {
-                  totalCount
-                }
                 url
+                message 
               }
             }
           }
         }
+      }
+    }
+  }
+  file: repository(owner: "${ownername}", name: "${reponame}") {
+      object(expression: "${branch}:${filepath}") {
+      ... on Blob {
+        isBinary
+        text
       }
     }
   }

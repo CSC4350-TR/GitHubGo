@@ -1,8 +1,8 @@
 {
   "name": "github_go",
   "version": "0.1.0",
-  "private": true,
   "homepage": "https://csc4350-tr.github.io/GitHubGo",
+  "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -14,14 +14,11 @@
     "react-plotly.js": "^2.6.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
-    "tw-elements": "^1.0.0-alpha12",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "set \"CI=false\" && react-scripts build",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -45,7 +42,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
-    "gh-pages": "^4.0.0",
     "postcss": "^8.4.18",
     "tailwindcss": "^3.2.2"
   }
