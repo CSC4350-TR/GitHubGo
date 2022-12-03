@@ -1,4 +1,4 @@
-import { axiosGitHubGraphQL } from "../.."
+import axios from "axios"
 import { orgNameQuery, ownerNameQuery, repoNameQuery, userNameQuery } from "./_graphql"
 
 const errorMapper = {
@@ -31,7 +31,12 @@ export const validateRepoStats = async (ownername, reponame, username, ignore, i
     query += `\n}`
 
     if (count !== 3) {
-        const res = await axiosGitHubGraphQL.post('', { query: query })
+        const res = await axios.post('https://api.github.com/graphql', { query: query }, {
+            headers: {
+                "Content-Type": 'application/json',
+                "Authorization": `bearer ${process.env.REACT_APP_GITHUB_TOKEN}`
+            }
+        }).catch(err => console.error(err))
         if ("errors" in res.data) {
             const errors = { ...defaultErrors, ...Object.fromEntries(res.data.errors.map(i => [i.path[0], { status: true, message: errorMapper[i.path[0]] }])) }
             return {
@@ -69,11 +74,16 @@ export const validateBlameFile = async (ownername, reponame, ignore, isOrg) => {
     query += `\n}`
 
     if (count !== 2) {
-        const res = await axiosGitHubGraphQL.post('', { query: query })
+        const res = await axios.post('https://api.github.com/graphql', { query: query }, {
+            headers: {
+                "Content-Type": 'application/json',
+                "Authorization": `bearer ${process.env.REACT_APP_GITHUB_TOKEN}`
+            }
+        }).catch(err => console.error(err))
         if ("errors" in res.data) {
             const errors = { ...defaultErrors, ...Object.fromEntries(res.data.errors.map(i => [i.path[0], { status: true, message: errorMapper[i.path[0]] }])) }
             return { result: false, errors: errors }
         }
     }
-    return { result: true, errors: defaultErrors}
+    return { result: true, errors: defaultErrors }
 }

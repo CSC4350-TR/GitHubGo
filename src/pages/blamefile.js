@@ -47,13 +47,13 @@ function BlameFile() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = await validateBlameFile(form.ownername, form.reponame, validate, isUser).catch(err => console.error(err.message));
+        const data = await validateBlameFile(form.ownername, form.reponame, validate, isUser);
         setErrors(i => ({ ...i, ...data.errors }))
         setValidate(Object.fromEntries(Object.entries(data.errors).map(i => [i[0], !i[1].status])))
         if (!data.result) return
         if (!fileValidate()) return
         setLoading(true)
-        const res = await fetchBlameFileData(form.ownername, form.reponame, branch.current, relativeFilePath.current).catch(err => console.error(err.message))
+        const res = await fetchBlameFileData(form.ownername, form.reponame, branch.current, relativeFilePath.current)
         if ("invalidLink" in res) {
             setValidate(i => ({ ...i, filepath: false }))
             setErrors(i => ({ ...i, filepath: { messasge: "invalid link", status: true } }))
